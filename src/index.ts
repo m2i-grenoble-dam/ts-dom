@@ -26,3 +26,8 @@ let paras = document.querySelectorAll('p');
 for (const item of paras) {
     item.style.fontStyle = 'italic';
 }
+
+para2.addEventListener('click', () => {
+    console.log('coucou');
+    
+})

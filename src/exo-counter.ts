@@ -5,12 +5,13 @@ let spanCounter = document.querySelector<HTMLElement>('#counter');
 let counter = 0;
 
 btnPlus.addEventListener('click', () => {
-    changeCounter(1)
+    changeCounter(1);
+
 });
 
 btnMinus.addEventListener('click', () => {
     
-    changeCounter(-1)
+    changeCounter(-1);
     
 });
 

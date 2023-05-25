@@ -31,3 +31,25 @@ para2.addEventListener('click', () => {
     console.log('coucou');
     
 })
+
+
+//Exemple ajout d'un nouvel élément html via le JS
+const target = document.querySelector<HTMLElement>('#target');
+//Version avec innerHTML, plutôt simple mais un peu moins de contrôle sur les éléments créés
+target.innerHTML = `
+    <ul>
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+    </ul>
+`
+
+//Version avec createElement, plus fastidieuse mais on peut faire tout ce qu'on veut directement sur les éléments créer sans besoin de refaire un querySelector (et donc de leur mettre un id et tout)
+const ul = document.createElement('ul');
+ul.classList.add('my-ul');
+ul.style.color = 'blue';
+target.appendChild(ul);
+
+const li = document.createElement('li')
+li.textContent = 'test';
+ul.appendChild(li);

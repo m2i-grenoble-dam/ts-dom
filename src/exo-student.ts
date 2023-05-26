@@ -5,6 +5,7 @@ interface Student {
     picture:string;
 }
 
+
 let students:Student[] = [
     {firstName: 'Student 1', name: 'Name 1', promo: 2023, picture: 'https://cdn.pixabay.com/photo/2022/06/29/10/38/job-7291427_1280.png'},
     {firstName: 'Student 2', name: 'Name 2', promo: 2023, picture: 'https://cdn.pixabay.com/photo/2022/06/29/10/38/job-7291427_1280.png'},
@@ -14,7 +15,11 @@ let students:Student[] = [
 let selected:Student|null = null;
 
 
-
+const form = document.querySelector('form');
+const inputName = document.querySelector<HTMLInputElement>('#name');
+const inputFirstname = document.querySelector<HTMLInputElement>('#firstname');
+const inputPromo = document.querySelector<HTMLInputElement>('#promo');
+const inputPicture = document.querySelector<HTMLInputElement>('#picture');
 const target = document.querySelector<HTMLElement>('#target');
 displayStudent(students);
 
@@ -76,9 +81,17 @@ function displayStudent(students:Student[]) {
         target.appendChild(col);
         
     }
+
+    if(selected) {
+        inputFirstname.value = selected.firstName;
+        inputPromo.value = String(selected.promo);
+        inputPicture.value = selected.picture;
+        inputName.value = selected.name;
+    } else {
+        form.reset();
+    }
 }
 
-const form = document.querySelector('form');
 
 form.addEventListener('submit', (event) => {
     event.preventDefault();
@@ -91,10 +104,7 @@ form.addEventListener('submit', (event) => {
     //     picture: data.get('picture')  as string
     // }
 
-    const inputName = document.querySelector<HTMLInputElement>('#name');
-    const inputFirstname = document.querySelector<HTMLInputElement>('#firstname');
-    const inputPromo = document.querySelector<HTMLInputElement>('#promo');
-    const inputPicture = document.querySelector<HTMLInputElement>('#picture');
+  
 
     let newStudent:Student = {
         name: inputName.value,
@@ -102,8 +112,12 @@ form.addEventListener('submit', (event) => {
         promo: Number(inputPromo.value),
         picture: inputPicture.value
     }
-    
-    students.push(newStudent);
+
+    if(!selected) {
+        students.push(newStudent);
+    } else {
+        Object.assign(selected, newStudent);
+    }
 
     displayStudent(students);
     

@@ -78,7 +78,33 @@ function displayStudent(students:Student[]) {
     }
 }
 
-document.querySelector('#change-name').addEventListener('click', () => {
-    selected.firstName = 'Prénom modifié';
+const form = document.querySelector('form');
+
+form.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    // const data = new FormData(form);
+    // let newStudent:Student = {
+    //     name: data.get('name')  as string,
+    //     firstName: data.get('firstname')  as string,
+    //     promo: Number(data.get('promo')),
+    //     picture: data.get('picture')  as string
+    // }
+
+    const inputName = document.querySelector<HTMLInputElement>('#name');
+    const inputFirstname = document.querySelector<HTMLInputElement>('#firstname');
+    const inputPromo = document.querySelector<HTMLInputElement>('#promo');
+    const inputPicture = document.querySelector<HTMLInputElement>('#picture');
+
+    let newStudent:Student = {
+        name: inputName.value,
+        firstName: inputFirstname.value,
+        promo: Number(inputPromo.value),
+        picture: inputPicture.value
+    }
+    
+    students.push(newStudent);
+
     displayStudent(students);
-})
+    
+});
